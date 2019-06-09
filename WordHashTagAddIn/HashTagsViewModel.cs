@@ -1,15 +1,30 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using Prism.Commands;
+using Prism.Mvvm;
 using WordHashTagAddIn.Annotations;
 
 namespace WordHashTagAddIn
 {
-    public class HashTagsViewModel : IHashTagsViewModel
+    public class HashTagsViewModel : BindableBase, IHashTagsViewModel
     {
-        private ObservableCollection<HashTag> _hashTags;
+        private readonly IAddIn _addin;
+        private ObservableCollection<HashTagParagraphs> _hashTags;
         private string _search;
-        public event PropertyChangedEventHandler PropertyChanged;
+
+        public HashTagsViewModel(IAddIn addin)
+        {
+            _addin = addin;
+            HashTags = new ObservableCollection<HashTagParagraphs>();
+            UpdateTagsCommand = new DelegateCommand(UpdateTags);
+        }
+
+        private void UpdateTags()
+        {
+            _addin.UpdateTags();
+        }
 
         public string Search
         {
@@ -17,23 +32,30 @@ namespace WordHashTagAddIn
             set => SetProperty(ref _search,value);
         }
 
-        public ObservableCollection<HashTag> HashTags
+        public ObservableCollection<HashTagParagraphs> HashTags
         {
             get => _hashTags;
             set => SetProperty(ref _hashTags,value);
         }
 
-        protected void SetProperty<T>(ref T field, T value)
+        public DelegateCommand UpdateTagsCommand { get; set; }
+
+        public void AddTag(HashTagItem hashTag)
         {
-            if (field.Equals(value) != true)
+            var tag = HashTags.FirstOrDefault(p => p.Name.ToLowerInvariant() == hashTag.Name.ToLowerInvariant());
+            if (tag == null)
             {
-                field = value;
+                tag = new HashTagParagraphs()
+                {
+                    Name = hashTag.Name,
+                };
+                HashTags.Add(tag);
             }
+            tag.Paragraphs.Add(hashTag.Paragraph);
+            tag.Count = tag.Paragraphs.Count;
+
         }
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+
+        
     }
 }
