@@ -72,7 +72,10 @@ namespace WordHashTagAddIn
             {
                 if (activeDocumentParagraph.Range.Text == selectedParagraph.Paragraph)
                 {
-                    activeDocumentParagraph.Range.Select();
+                    var start = activeDocumentParagraph.Range.Start;
+                    var end = start;
+                    var range = this.Application.ActiveDocument.Range(start, end);
+                    range.Select();
                 }
             }
         }

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:WordHashTagAddIn"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="300" Background="White" d:DataContext="{d:DesignInstance local:HashTagsViewModel }">
-    <Grid Margin="10">
+    <ScrollViewer Margin="10">
         <StackPanel>
             <Label Content="Search"></Label>
             <TextBox Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" MinWidth="100" Margin="0,10"/>
@@ -34,5 +34,5 @@
             <Button Content="Update Tags" Command="{Binding UpdateTagsCommand}" Margin="0,10"></Button>
             <CheckBox IsChecked="{Binding IsHighlightingTags}" Content="Highlight Tags"></CheckBox>
         </StackPanel>
-    </Grid>
+    </ScrollViewer>
 </UserControl>
