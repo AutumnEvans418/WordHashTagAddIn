@@ -1,23 +1,47 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Prism.Mvvm;
 
 namespace WordHashTagAddIn
 {
     public class HashTagItem
     {
+
         public string Name { get; set; }
+
         public string Paragraph { get; set; }
     }
-    public class HashTagParagraphs
+    public class HashTagParagraphs : BindableBase
     {
-        public HashTagParagraphs()
+        private readonly IAddIn _addIn;
+        private ObservableCollection<HashTagItem> _paragraphs;
+        private HashTagItem _selectedParagraph;
+
+        public HashTagParagraphs(IAddIn addIn)
         {
-            Paragraphs = new ObservableCollection<string>();
+            _addIn = addIn;
+            Paragraphs = new ObservableCollection<HashTagItem>();
         }
         public string Name { get; set; }
 
         public int Count { get; set; }
 
-        public ObservableCollection<string> Paragraphs { get; set; }
+        public ObservableCollection<HashTagItem> Paragraphs
+        {
+            get => _paragraphs;
+            set => SetProperty(ref _paragraphs,value);
+        }
+
+        public HashTagItem SelectedParagraph
+        {
+            get => _selectedParagraph;
+            set => SetProperty(ref _selectedParagraph,value, SelectedParagraphChanged);
+        }
+
+        private void SelectedParagraphChanged()
+        {
+            if(SelectedParagraph != null)
+            _addIn.NavigateToParagraph(SelectedParagraph);
+        }
     }
 }
