@@ -171,6 +171,7 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="HashTag.cs" />
     <Compile Include="HashTagsControl.xaml.cs">
       <DependentUpon>HashTagsControl.xaml</DependentUpon>
     </Compile>
@@ -186,6 +187,9 @@
     <Compile Include="HashTagsRibbon.Designer.cs">
       <DependentUpon>HashTagsRibbon.cs</DependentUpon>
     </Compile>
+    <Compile Include="HashTagsViewModel.cs" />
+    <Compile Include="IHashTagsViewModel.cs" />
+    <Compile Include="Panes.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

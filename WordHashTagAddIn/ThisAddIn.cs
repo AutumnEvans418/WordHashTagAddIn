@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -12,58 +8,9 @@ using Word = Microsoft.Office.Interop.Word;
 using Office = Microsoft.Office.Core;
 using Microsoft.Office.Tools.Word;
 using Unity;
-using WordHashTagAddIn.Annotations;
 
 namespace WordHashTagAddIn
 {
-    public static class Panes
-    {
-        public static CustomTaskPane HashTags;
-        
-    }
-    public class HashTagsViewModel : IHashTagsViewModel
-    {
-        private ObservableCollection<HashTag> _hashTags;
-        private string _search;
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public string Search
-        {
-            get => _search;
-            set => SetProperty(ref _search,value);
-        }
-
-        public ObservableCollection<HashTag> HashTags
-        {
-            get => _hashTags;
-            set => SetProperty(ref _hashTags,value);
-        }
-
-        protected void SetProperty<T>(ref T field, T value)
-        {
-            if (field.Equals(value) != true)
-            {
-                field = value;
-            }
-        }
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
-
-    public interface IHashTagsViewModel : INotifyPropertyChanged
-    {
-        string Search { get; set; }
-        ObservableCollection<HashTag> HashTags { get; set; }
-    }
-    public class HashTag
-    {
-        public string Name { get; set; }
-        public int Count { get; set; }
-        public IEnumerable<string> Paragraphs { get; set; }
-    }
     public partial class ThisAddIn
     {
         private IHashTagsViewModel vm;
