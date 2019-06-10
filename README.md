@@ -1,4 +1,4 @@
-# WordHashTagAddIn
+# Microsoft Word Hash-Tag AddIn
 Converts hashtags in word docs into easily searchable paragraphs.
 
 ## How it works
