@@ -175,6 +175,7 @@
   -->
   <ItemGroup>
     <Compile Include="HashTagItem.cs" />
+    <Compile Include="HashTagParagraphs.cs" />
     <Compile Include="HashTagsControl.xaml.cs">
       <DependentUpon>HashTagsControl.xaml</DependentUpon>
     </Compile>

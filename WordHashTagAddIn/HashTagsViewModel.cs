@@ -59,6 +59,12 @@ namespace WordHashTagAddIn
             set => SetProperty(ref _isHighlightingTags, value);
         }
 
+        public bool IsShowingHashTagsView
+        {
+            get => Panes.HashTags.Visible;
+            set => Panes.HashTags.Visible = value;
+        }
+
         public DelegateCommand UpdateTagsCommand { get; set; }
 
         public void AddTag(HashTagItem hashTag)
