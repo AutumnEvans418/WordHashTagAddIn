@@ -26,13 +26,36 @@
     <NoStandardLibraries>false</NoStandardLibraries>
     <RootNamespace>WordHashTagAddIn</RootNamespace>
     <AssemblyName>WordHashTagAddIn</AssemblyName>
-    <LoadBehavior>3</LoadBehavior>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <DefineConstants>VSTO40</DefineConstants>
+    <IsWebBootstrapper>False</IsWebBootstrapper>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <BootstrapperComponentsLocation>HomeSite</BootstrapperComponentsLocation>
+    <PublishUrl>publish\</PublishUrl>
+    <InstallUrl />
+    <TargetCulture>en</TargetCulture>
+    <ApplicationVersion>1.0.0.1</ApplicationVersion>
+    <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>days</UpdateIntervalUnits>
+    <ProductName>WordHashTagAddIn</ProductName>
+    <PublisherName />
+    <SupportUrl />
+    <FriendlyName>WordHashTagAddIn</FriendlyName>
+    <OfficeApplicationDescription />
+    <LoadBehavior>3</LoadBehavior>
   </PropertyGroup>
   <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.VSTORuntime.4.0">
       <Visible>False</Visible>
       <ProductName>Microsoft Visual Studio 2010 Tools for Office Runtime %28x86 and x64%29</ProductName>
@@ -225,6 +248,16 @@
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
+    <None Include="publish\Application Files\WordHashTagAddIn_1_0_0_0\Microsoft.Office.Tools.Common.v4.0.Utilities.dll.deploy" />
+    <None Include="publish\Application Files\WordHashTagAddIn_1_0_0_0\Prism.dll.deploy" />
+    <None Include="publish\Application Files\WordHashTagAddIn_1_0_0_0\Screenshots\Example1.PNG.deploy" />
+    <None Include="publish\Application Files\WordHashTagAddIn_1_0_0_0\System.Runtime.CompilerServices.Unsafe.dll.deploy" />
+    <None Include="publish\Application Files\WordHashTagAddIn_1_0_0_0\Unity.Abstractions.dll.deploy" />
+    <None Include="publish\Application Files\WordHashTagAddIn_1_0_0_0\Unity.Container.dll.deploy" />
+    <None Include="publish\Application Files\WordHashTagAddIn_1_0_0_0\WordHashTagAddIn.dll.deploy" />
+    <None Include="publish\Application Files\WordHashTagAddIn_1_0_0_0\WordHashTagAddIn.dll.manifest" />
+    <None Include="publish\Application Files\WordHashTagAddIn_1_0_0_0\WordHashTagAddIn.vsto" />
+    <None Include="publish\WordHashTagAddIn.vsto" />
     <None Include="Releases\WordHashTagAddIn1.0.0.zip" />
     <None Include="ThisAddIn.Designer.xml">
       <DependentUpon>ThisAddIn.cs</DependentUpon>
@@ -233,6 +266,7 @@
       <DependentUpon>ThisAddIn.Designer.xml</DependentUpon>
     </Compile>
     <AppDesigner Include="Properties\" />
+    <None Include="WordHashTagAddIn_1_TemporaryKey.pfx" />
     <None Include="WordHashTagAddIn_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -242,6 +276,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="publish\setup.exe" />
     <Content Include="Screenshots\Example1.PNG" />
   </ItemGroup>
   <PropertyGroup>
@@ -252,10 +287,16 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>WordHashTagAddIn_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>WordHashTagAddIn_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>1D4656C5FB0B7246CC0D462AA71CA5AB969A18EB</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>F173DD43A54E19442A731C9A1E0D66F81F1A44EA</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>WordHashTagAddIn_1_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -266,8 +307,8 @@
     <VisualStudio>
       <FlavorProperties GUID="{BAA0C2D2-18E2-41B9-852F-F413020CAA33}">
         <ProjectProperties HostName="Word" HostPackage="{29A7B9D7-A7F1-4328-8EF0-6B2D1A56B2C1}" OfficeVersion="15.0" VstxVersion="4.0" ApplicationType="Word" Language="cs" TemplatesPath="" DebugInfoExeName="#Software\Microsoft\Office\16.0\Word\InstallRoot\Path#WINWORD.EXE" DebugInfoCommandLine="/x" AddItemTemplatesGuid="{51063C3A-E220-4D12-8922-BDA915ACD783}" />
-        <Host Name="Word" GeneratedCodeNamespace="WordHashTagAddIn" IconIndex="0">
-          <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" />
+        <Host Name="Word" GeneratedCodeNamespace="WordHashTagAddIn" PublishedHash="69C324AB27932AA2FBF2B7EA72250886FF164DE6" IconIndex="0">
+          <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" PublishedHash="466C085ACE32DEFB63C2E2C4F75C1CEE6365577A" />
         </Host>
       </FlavorProperties>
     </VisualStudio>
