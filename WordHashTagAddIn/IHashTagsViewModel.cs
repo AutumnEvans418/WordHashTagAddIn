@@ -12,6 +12,7 @@ namespace WordHashTagAddIn
     {
         string Search { get; set; }
         bool IsHighlightingTags { get; set; }
+        bool IsShowingHashTagsView { get; set; }
         void AddTag(HashTagItem hashTag);
         void ClearTags();
     }

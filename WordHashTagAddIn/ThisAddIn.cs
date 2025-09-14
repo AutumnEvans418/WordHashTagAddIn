@@ -24,18 +24,14 @@ namespace WordHashTagAddIn
             vm = container.Resolve<IHashTagsViewModel>();
             this.Application.DocumentBeforeSave +=
                 Application_DocumentBeforeSave;
-            this.Application.DocumentChange += DocumentChanged;
             CustomTaskPane pane = CustomTaskPanes.FirstOrDefault(p => p.Title == paneName) ??
                                   this.CustomTaskPanes.Add(container.Resolve<HashTagsForm>(), paneName);
-            pane.Visible = true;
+            //pane.Visible = true;
             Panes.HashTags = pane;
 
         }
 
-        private void DocumentChanged()
-        {
-            
-        }
+       
 
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
@@ -82,27 +78,29 @@ namespace WordHashTagAddIn
 
         public void UpdateTags(Word.Document doc)
         {
-            vm.ClearTags();
-            foreach (Word.Paragraph docParagraph in doc.Paragraphs)
+            
+            if (vm.IsShowingHashTagsView)
             {
-                var text = docParagraph.Range.Text;
-                var hashTags = text.Split(' ', '\r', '\n').Where(p => p.StartsWith("#"));
-                foreach (var hashTag in hashTags)
-                {
-                    if (vm.IsHighlightingTags)
-                    {
-                        var start = docParagraph.Range.Start +
-                                    text.IndexOf(hashTag, StringComparison.InvariantCultureIgnoreCase);
-                        var end = start + hashTag.Length;
-                        var range = doc.Range(start, end);
-                        range.HighlightColorIndex = Word.WdColorIndex.wdYellow;
-                    }
-                    vm.AddTag(new HashTagItem() { Name = hashTag, Paragraph = text, });
-
-                }
-
-
                 
+                vm.ClearTags();
+                foreach (Word.Paragraph docParagraph in doc.Paragraphs)
+                {
+                    var text = docParagraph.Range.Text;
+                    var hashTags = text.Split(' ', '\r', '\n').Where(p => p.StartsWith("#"));
+                    foreach (var hashTag in hashTags)
+                    {
+                        if (vm.IsHighlightingTags)
+                        {
+                            var start = docParagraph.Range.Start +
+                                        text.IndexOf(hashTag, StringComparison.InvariantCultureIgnoreCase);
+                            var end = start + hashTag.Length;
+                            var range = doc.Range(start, end);
+                            range.HighlightColorIndex = Word.WdColorIndex.wdYellow;
+                        }
+                        vm.AddTag(new HashTagItem() { Name = hashTag, Paragraph = text, });
+
+                    }
+                }
             }
         }
     }
